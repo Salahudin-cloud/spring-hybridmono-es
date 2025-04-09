@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: jwt-es
+  profiles:
+    active: dev
