@@ -6,7 +6,6 @@ import lombok.*;
 
 
 @Entity
-@Table(name = "invoices")
 @Getter
 @Setter
 @AllArgsConstructor
