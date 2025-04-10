@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @RequiredArgsConstructor
 @Service
@@ -37,5 +38,18 @@ public class BatchService {
                 .build();
     }
 
+    public Batch getBatchById(Long batchId){
+        return batchRepository.findById(batchId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Data batch dengan id " + batchId + " tidak ditemukan"));
+    }
+
+    public Batch getBatchByProductionCode(String productionCode){
+        return batchRepository.findByProductionCode(productionCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Data batch dengan kode produksi " + productionCode + " tidak ditemukan"));
+    }
+
+    public Batch updateStockByProductionCode(String productionCode, int addedStock) {
+        Batch batch = getBatchByProductionCode(productionCode);
+        batch.setTotalWarehouseStock(batch.getTotalWarehouseStock() + addedStock);
+        return batch;
+    }
 
 }
