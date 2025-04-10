@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -49,6 +50,16 @@ public class PharmacyService {
                 .message("Berhasil membuat permohonan")
                 .status(HttpStatus.CREATED.value())
                 .build();
+    }
+
+    public Void approveRequest(Long pharmacyId, String approver) {
+        PharmacyRequest request = getPharmacyRequestById(pharmacyId);
+        List<PharmacyRequestItem> items =
+
+    }
+
+    public PharmacyRequest getPharmacyRequestById(Long pharmacyId) {
+        return pharmacyRepository.findById(pharmacyId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Data farmasi request dengan id " + pharmacyId + " tidak ditemukan"));
     }
 
 }
