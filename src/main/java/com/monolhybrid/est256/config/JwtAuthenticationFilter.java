@@ -53,6 +53,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 writeErrorResponse(response, "Invalid JWT token");
                 return;
             }
+        }else {
+            writeErrorResponse(response, "Authorization token is missing or malformed");
+            return;
         }
 
         filterChain.doFilter(request, response);
