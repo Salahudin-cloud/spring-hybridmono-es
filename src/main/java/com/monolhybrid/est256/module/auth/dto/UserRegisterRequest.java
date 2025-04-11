@@ -21,6 +21,7 @@ public class UserRegisterRequest {
     @NotEmpty(message = "Password jangan dibiarkan kosong")
     private String password;
 
+    @NotNull(message = "Role jangan dibiarkan kosong")
     private User.RoleBase role;
 
 }

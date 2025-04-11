@@ -71,5 +71,4 @@ public class BatchService {
 
         batchRepository.save(batch);
     }
-
 }

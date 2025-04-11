@@ -28,8 +28,6 @@ public class User extends BaseEntity {
     private RoleBase role;
 
     public enum RoleBase {
-        PHARMACIST, WAREHOUSE_CLERK, ADMIN
+        PHARMACIST, WAREHOUSE_CLERK
     }
-
-
 }
