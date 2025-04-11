@@ -1,6 +1,7 @@
 package com.monolhybrid.est256.module.warehouse.service;
 
 import com.monolhybrid.est256.common.dto.WebResponse;
+import com.monolhybrid.est256.module.pharmacy.entity.PharmacyRequest;
 import com.monolhybrid.est256.module.warehouse.dto.batch.BatchCreateRequest;
 import com.monolhybrid.est256.module.warehouse.entity.Batch;
 import com.monolhybrid.est256.module.warehouse.entity.Drug;
@@ -50,6 +51,25 @@ public class BatchService {
         Batch batch = getBatchByProductionCode(productionCode);
         batch.setTotalWarehouseStock(batch.getTotalWarehouseStock() + addedStock);
         return batch;
+    }
+
+    public void decreaseStock(Long batchId, int stockRequest, PharmacyRequest.UnitType unitType) {
+        Batch batch = getBatchById(batchId);
+        switch (unitType) {
+            case INPATIENT -> {
+                batch.setTotalWarehouseStock(batch.getTotalWarehouseStock() - stockRequest);
+                batch.setTotalInpatientStock(batch.getTotalInpatientStock() + stockRequest);
+            }
+            case OUTPATIENT -> {
+                batch.setTotalWarehouseStock(batch.getTotalWarehouseStock() - stockRequest);
+                batch.setTotalInpatientStock(batch.getTotalOutpatientStock() + stockRequest);
+            }
+            default -> {
+                throw new IllegalArgumentException("Unit tidak terdaftar");
+            }
+        }
+
+        batchRepository.save(batch);
     }
 
 }

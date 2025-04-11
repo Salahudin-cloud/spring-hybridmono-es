@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PharmacyListResponse {
+public class PharmacyRequestResponse {
 
     private Long pharmacyRequestId;
     private LocalDate requestDate;
@@ -22,6 +23,6 @@ public class PharmacyListResponse {
     private PharmacyRequest.StatusRequest status;
     private LocalDateTime createdAtPharmacyRequest;
     private LocalDateTime updatedAtPharmacyRequest;
-
+    private List<PharmacyListItemResponse> items;
 
 }

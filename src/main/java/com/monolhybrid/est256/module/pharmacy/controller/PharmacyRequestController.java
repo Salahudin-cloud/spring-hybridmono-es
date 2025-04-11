@@ -2,7 +2,7 @@ package com.monolhybrid.est256.module.pharmacy.controller;
 
 import com.monolhybrid.est256.common.dto.WebResponse;
 import com.monolhybrid.est256.module.pharmacy.dto.pharmacyRequest.PharmacyCreateRequest;
-import com.monolhybrid.est256.module.pharmacy.service.PharmacyService;
+import com.monolhybrid.est256.module.pharmacy.service.PharmacyRequestService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/pharmacy-request")
 public class PharmacyRequestController {
 
-    private final PharmacyService pharmacyService;
+    private final PharmacyRequestService pharmacyRequestService;
 
     @PostMapping(
             path = "/create",
@@ -24,7 +24,7 @@ public class PharmacyRequestController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public WebResponse<Void> createRequest(@Valid @RequestBody PharmacyCreateRequest request){
-        return pharmacyService.createPharmacyRequest(request);
+        return pharmacyRequestService.createPharmacyRequest(request);
     }
 
 }
